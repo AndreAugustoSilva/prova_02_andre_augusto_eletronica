@@ -1,18 +1,20 @@
 function calculoResistor() {
-    let faixas = parseInt(prompt("O resistor possui 4 ou 5 faixas?"))
-    let cor1, cor2, cor3, cor4, cor5 = 0
+    
+    let mostrar = true;
+    let faixas = parseInt(prompt("O resistor possui 4 ou 5 faixas?"));
+    let cor1, cor2, cor3, cor4, cor5 = 0;
 
     switch(faixas) {
         case 4:
             cor1 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco.")*10);
-            cor2 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco."));
+            cor2 = parseFloat(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco."));
             cor3 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para dourado;\n- 9 para prateado."));
             cor4 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para marrom;\n- 1 para vermelho;\n- 2 para verde;\n- 3 para azul;\n- 4 para violeta;\n- 5 para cinza;\n- 6 para dourado;\n- 7 para prateado."));
             break;
         case 5:
             cor1 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco.")*100);
             cor5 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco.")*10);
-            cor2 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco."));
+            cor2 = parseFloat(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para cinza;\n- 9 para branco."));
             cor3 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para preto;\n- 1 para marrom;\n- 2 para vermelho;\n- 3 para laranja;\n- 4 para amarelo;\n- 5 para verde;\n- 6 para azul;\n- 7 para violeta;\n- 8 para dourado;\n- 9 para prateado."));
             cor4 = parseInt(prompt("Digite um ID de uma cor:\n- 0 para marrom;\n- 1 para vermelho;\n- 2 para verde;\n- 3 para azul;\n- 4 para violeta;\n- 5 para cinza;\n- 6 para dourado;\n- 7 para prateado."));
             break;
@@ -25,7 +27,8 @@ function calculoResistor() {
     } else if(cor3 == 9) {
         cor3 = 0.01;
     } else {
-        console.log("Erro: ID Inválido.")
+        console.log("Erro: ID Inválido.");
+        mostrar = false;
     }
 
     switch(cor4) {
@@ -54,7 +57,8 @@ function calculoResistor() {
             cor4 = 10;
             break;
         default:
-            console.log("Erro: ID Inválido.")
+            console.log("Erro: ID Inválido.");
+            mostrar = false;
             break;
     }
 
@@ -63,7 +67,11 @@ function calculoResistor() {
     cor2 *= cor3;
 
     let prefixoOhm;
-    if(cor2 < 1000) {
+
+    if(cor2 < 1) {
+        cor2 *= 1000;
+        prefixoOhm = 'm';
+    } else if(cor2 < 1000) {
         prefixoOhm = '';
     } else if(cor2 < 10**6) {
         cor2 /= 1000;
@@ -76,5 +84,7 @@ function calculoResistor() {
         prefixoOhm = 'B';
     }
 
-    console.log("O resistor possui a resistência de ", cor2,prefixoOhm, "Ω, com ", cor4, "% de tolerância.")
+    if(mostrar = true) {
+        console.log("O resistor possui a resistência de\n", cor2,prefixoOhm, "Ω, com ", cor4, "% de tolerância.");
+    }
 }
